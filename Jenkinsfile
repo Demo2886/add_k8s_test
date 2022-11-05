@@ -55,6 +55,7 @@ node {
             }
             catch(err){
               depl = false
+              slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
             }
             try{
               if(depl){
