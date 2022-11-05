@@ -1,1 +1,2 @@
-# test_bootcamp
+# DevOps test assignment for IT Bootcamp participants!
+
