@@ -16,23 +16,13 @@ node {
     
 //   =================================================================================================  
 
-    stage ("Lint dockerfile") {
-        agent {
-            docker {
-                image 'hadolint/hadolint:latest-debian'
-                label 'master'
-                //image 'ghcr.io/hadolint/hadolint:latest-debian'
-             }
-        }
-        stage ("Lint dockerfile2") {
-            sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
-        }
-//        post {
-//            always {
-//                archiveArtifacts 'hadolint_lint.txt'
-//             }
-//       }
-  }
+    stage('Build image hadolint') {
+        app = docker.build("hadolint/hadolint")
+    }
+
+     stage('Dockerfile test hadolint') {
+            sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+    }
 
 //   =================================================================================================     
     
