@@ -19,7 +19,7 @@ node {
 
      stage('Test Dockerfile hadolint') {
             //sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3042   --ignore DL3013  Dockerfile"
-            sh "docker run --rm -i hadolint/hadolint < ./Dockerfile"
+            sh "docker run --rm -i hadolint/hadolint --ignore DL3042   --ignore DL3013  < ./Dockerfile"
     }
 
 
