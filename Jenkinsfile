@@ -67,7 +67,7 @@ node {
                 sh 'kubectl delete namespace pre-prod'
                 
               }
-              slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+              
               }
             }
             catch(Exception err){
@@ -76,6 +76,7 @@ node {
             }
         
         }
+        slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
       }
       
     }
