@@ -11,9 +11,9 @@ node {
         checkout scm
     }
 	
-//    stage('Build image') {
-//        app = docker.build("jokercat2886/test-jenkins")
-//    }
+    stage('Build image') {
+        app = docker.build("jokercat2886/test-jenkins")
+    }
 	
 //    stage('Test image') {
 //        app.inside {
