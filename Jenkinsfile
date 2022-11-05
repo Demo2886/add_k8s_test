@@ -1,11 +1,11 @@
 node {
      def app
 
-//	environment{
+	environment{
 //      registry = "jokercat2886/test-jenkins"
-//      registryCredential = 'DockerHub'
+      registryCredential = 'DockerHub'
 //      docker_stop = '\$(docker ps -a -q)'
-//   }
+   }
 	
     stage('Clone repository') {
         checkout scm
@@ -22,6 +22,10 @@ node {
             sh "curl http://127.0.0.1:8001"
     }
 
+    stage('Push Image to repo') {
+        sh 'docker push $registryCredential/test-jenkins:latest'		
+		sh "docker stop \$(docker ps -a -q)"
+      }
 	
 }	
 	
