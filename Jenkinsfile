@@ -1,12 +1,6 @@
 node {
      def app
 
-	environment{
-//      registry = "jokercat2886/test-jenkins"
-      registryCredential = 'DockerHub'
-//      docker_stop = '\$(docker ps -a -q)'
-   }
-	
     stage('Clone repository') {
         checkout scm
     }
@@ -68,14 +62,14 @@ node {
       
     }
     
-  post {
-    success {
-      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-    }
-    failure {
-      slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-    }
-  }    
+//  post {
+//    success {
+//      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//    }
+//    failure {
+//      slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//    }
+//  }    
     
     
 }	
