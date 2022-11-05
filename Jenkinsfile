@@ -16,13 +16,10 @@ node {
     
 //   =================================================================================================  
 
-    stage('Build image hadolint') {
-        app = docker.build("hadolint/hadolint")
+     stage('Test Dockerfile hadolint') {
+            sh "docker run --rm -i hadolint/hadolint hadolint   --ignore DL3042   --ignore DL3013   - < Dockerfile"
     }
 
-     stage('Dockerfile test hadolint') {
-            sh "docker run --rm -p 9001:9000 -i hadolint/hadolint < Dockerfile"
-    }
 
 //   =================================================================================================     
     
