@@ -13,6 +13,31 @@ node {
     stage('Clone repository') {
         checkout scm
     }
+    
+//   =================================================================================================  
+
+    stage ("Lint dockerfile") {
+        agent {
+            docker {
+                image 'hadolint/hadolint:latest-debian'
+                label 'master'
+                //image 'ghcr.io/hadolint/hadolint:latest-debian'
+             }
+        }
+        stage {
+            sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
+        }
+        post {
+            always {
+                archiveArtifacts 'hadolint_lint.txt'
+             }
+       }
+  }
+
+//   =================================================================================================     
+    
+    
+    
 	
     stage('Build image') {
         app = docker.build("jokercat2886/test-jenkins")
