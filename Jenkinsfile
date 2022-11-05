@@ -22,3 +22,4 @@ node {
 	          sh "docker stop $docker_stop"
         }
     }
+ }
