@@ -24,7 +24,7 @@ node {
                 //image 'ghcr.io/hadolint/hadolint:latest-debian'
              }
         }
-        stage {
+        stage ("Lint dockerfile2") {
             sh 'hadolint Dockerfile | tee -a hadolint_lint.txt'
         }
         post {
