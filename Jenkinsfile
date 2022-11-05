@@ -86,17 +86,18 @@ node {
       
     }
     
-    stage ('Send Email') {
-      echo 'Send Email'
-        post {
-          success {
-            slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-          }
-            failure {
-              slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-            }
-        }  
-    } 
+
+def attachments = [
+  [
+    text: 'I find your lack of faith disturbing!',
+    fallback: 'Hey, Vader seems to be mad at you.',
+    color: '#ff0000'
+  ]
+]
+
+slackSend(channel: "#monitoring-nefedin", attachments: attachments)
+
+
 }	
 	
 	
