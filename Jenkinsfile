@@ -14,20 +14,12 @@ node {
         //git url:'https://github.com/Demo2886/add_k8s_test.git', branch:'master'
         checkout scm
     }
-    
-//   =================================================================================================  
-
+ 
      stage('Test Dockerfile hadolint') {
 
             sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3013  --ignore DL3042  - < Dockerfile"
   
     }
-
-
-//   =================================================================================================     
-    
-    
-    
 	
     stage('Build image') {
         app = docker.build("jokercat2886/test-jenkins")
@@ -54,7 +46,6 @@ node {
       }
     }
     
-    
     stage('Deploy in prod') {
       script {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
@@ -74,17 +65,20 @@ node {
                 sh 'kubectl get pods --namespace=prod'
                 sh 'kubectl delete -f k8s_bom.yaml --namespace=pre-prod'
                 sh 'kubectl delete namespace pre-prod'
+                slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
               }
               }
             }
             catch(Exception err){
               error "Deployment filed"
+              slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
             }
         
         }
       }
       
     }
+
     
       slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
           
