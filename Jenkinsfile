@@ -41,7 +41,7 @@ node {
     }
 
     stage('Push Image to repo') {
-        sh 'docker push jokercat2886/test-jenkins:latest'		
+        sh "docker push jokercat2886/test-jenkins:latest"		
 		sh "docker stop \$(docker ps -a -q)"
       }
       
