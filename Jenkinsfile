@@ -65,13 +65,14 @@ node {
                 sh 'kubectl get pods --namespace=prod'
                 sh 'kubectl delete -f k8s_bom.yaml --namespace=pre-prod'
                 sh 'kubectl delete namespace pre-prod'
-                buildResult.slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                
               }
+              slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
               }
             }
             catch(Exception err){
               error "Deployment filed"
-              stageResult.slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+              slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
             }
         
         }
