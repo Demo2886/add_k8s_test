@@ -1,3 +1,12 @@
+//------------------------------------------
+// Pipeline Workflow
+//
+// Version      Date        Info
+// 1.∞          2022        Initial Version
+//
+// Made by Alexandr Nefedin (c) 2022
+//-------------------------------------------
+
 node {
      def app
 
