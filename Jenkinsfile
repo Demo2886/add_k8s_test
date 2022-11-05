@@ -21,8 +21,7 @@ node {
     }
 
      stage('Dockerfile test hadolint') {
-	        sh "docker run -p 9001:9000 -d hadolint/hadolint:latest"
-            sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+            sh "docker run --rm -p 9001:9000 -i hadolint/hadolint < Dockerfile"
     }
 
 //   =================================================================================================     
