@@ -19,10 +19,7 @@ node {
 
      stage('Test Dockerfile hadolint') {
             //sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3042   --ignore DL3013  Dockerfile"
-            sh "docker run --rm -i hadolint/hadolint hadolint \
-  --ignore DL3013 \
-  --ignore DL3042 \
-  - < Dockerfile"
+            sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3013  --ignore DL3042  - < Dockerfile"
   
     }
 
@@ -37,7 +34,7 @@ node {
     }
 
      stage('Build run') {
-            sh "docker run -p 8001:8000 -d jokercat2886/test-jenkins:latest"
+            sh "docker run -p 8001:8002 -d jokercat2886/test-jenkins:latest"
     }
      stage('docker test') {
             sh "curl http://127.0.0.1:8001"
@@ -89,16 +86,17 @@ node {
       
     }
     
-  post {
-    success {
-      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-    }
-    failure {
-      slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-    }
-  }    
-    
-    
+    stage ('Send Email') {
+      echo 'Send Email'
+        post {
+          success {
+            slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+          }
+            failure {
+              slackSend (color: '#FF0000', message: "Deployment failed: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+            }
+        }  
+    } 
 }	
 	
 	

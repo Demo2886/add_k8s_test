@@ -7,7 +7,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b'Hello world from hostname: ' + socket.gethostname().encode())
 
-SERVER_PORT = 8000
+SERVER_PORT = 8002
 httpd = HTTPServer(('0.0.0.0', SERVER_PORT), SimpleHTTPRequestHandler)
 print('Listening on port %s ...' % SERVER_PORT)
 httpd.serve_forever()
