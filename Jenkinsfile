@@ -11,14 +11,14 @@ node {
      def app
 	
     stage('Clone repository') {
-        git url:'https://github.com/Demo2886/add_k8s_test.git', branch:'master'
-        //checkout scm
+        //git url:'https://github.com/Demo2886/add_k8s_test.git', branch:'master'
+        checkout scm
     }
     
 //   =================================================================================================  
 
      stage('Test Dockerfile hadolint') {
-            sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3042   --ignore DL3013  < Dockerfile"
+            sh "docker run --rm -i hadolint/hadolint hadolint --ignore DL3042   --ignore DL3013  Dockerfile"
     }
 
 
