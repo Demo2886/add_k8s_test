@@ -34,7 +34,7 @@ node {
     }
 
      stage('Build run') {
-            sh "docker run -p 8001:8002 -d jokercat2886/test-jenkins:latest"
+            sh "docker run -p 8001:8000 -d jokercat2886/test-jenkins:latest"
     }
      stage('docker test') {
             sh "curl http://127.0.0.1:8001"
@@ -86,18 +86,8 @@ node {
       
     }
     
-
-def attachments = [
-  [
-    text: 'I find your lack of faith disturbing!',
-    fallback: 'Hey, Vader seems to be mad at you.',
-    color: '#ff0000'
-  ]
-]
-
-slackSend(channel: "#monitoring-nefedin", attachments: attachments)
-
-
+      slackSend (color: '#00FF00', message: "Deployment success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+          
 }	
 	
 	
