@@ -1,11 +1,11 @@
 node {
      def app
 
-	environment{
+//	environment{
 //      registry = "jokercat2886/test-jenkins"
-      registryCredential = 'DockerHub'
+//      registryCredential = 'DockerHub'
 //      docker_stop = '\$(docker ps -a -q)'
-   }
+//  }
 	
     stage('Clone repository') {
         checkout scm
